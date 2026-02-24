@@ -3,32 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NDIS Support Hub | Exceptional Disability Services</title>
+    <title>NDIS Support Hub | Next-Gen Disability Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00843D;
-            --primary-dark: #005c2f;
-            --primary-light: #00a854;
-            --accent: #FF6B35;
-            --dark: #1a1a2e;
-            --gray: #64748b;
-            --light: #f8fafc;
-            --white: #ffffff;
-            --shadow: 0 10px 40px rgba(0,0,0,0.08);
-            --shadow-hover: 0 20px 60px rgba(0,0,0,0.12);
+            --primary: #00D67D;
+            --primary-dark: #00B35F;
+            --primary-glow: rgba(0, 214, 125, 0.4);
+            --accent: #7C3AED;
+            --accent-glow: rgba(124, 58, 237, 0.4);
+            --dark-bg: #0a0a0f;
+            --dark-card: #12121a;
+            --dark-border: #1e1e2e;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.7;
-            color: var(--dark);
-            background: var(--white);
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
             overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -2;
+        }
+        
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.5;
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .bg-glow-1 {
+            top: -200px;
+            right: -100px;
+            background: var(--primary-glow);
+        }
+        
+        .bg-glow-2 {
+            bottom: -200px;
+            left: -100px;
+            background: var(--accent-glow);
+            animation-delay: -10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 30px) scale(1.1); }
         }
         
         /* Navigation */
@@ -37,16 +78,16 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 20px 40px;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -58,72 +99,84 @@
             gap: 12px;
             font-size: 1.4rem;
             font-weight: 700;
-            color: var(--primary);
+            color: white;
             text-decoration: none;
         }
         
         .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: var(--primary);
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            box-shadow: 0 0 30px var(--primary-glow);
         }
         
         nav ul {
             display: flex;
             list-style: none;
-            gap: 35px;
+            gap: 40px;
             align-items: center;
         }
         
         nav a {
             text-decoration: none;
-            color: var(--dark);
+            color: var(--text-secondary);
             font-weight: 500;
             font-size: 0.95rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
         }
         
-        nav a:hover { color: var(--primary); }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover {
+            color: white;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
         
         .nav-cta {
-            background: var(--primary);
-            color: white !important;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--dark-bg) !important;
             padding: 12px 24px;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 600;
+            box-shadow: 0 0 20px var(--primary-glow);
         }
         
-        .nav-cta:hover { background: var(--primary-dark); }
+        .nav-cta::after { display: none !important; }
         
-        /* Hero Section */
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px var(--primary-glow);
+        }
+        
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 50%, #ffffff 100%);
-            position: relative;
             padding: 120px 40px 80px;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(0,132,61,0.08) 0%, transparent 70%);
-            border-radius: 50%;
+            position: relative;
         }
         
         .hero-content {
-            max-width: 700px;
+            max-width: 800px;
             position: relative;
             z-index: 1;
         }
@@ -131,19 +184,19 @@
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: white;
-            padding: 8px 16px;
+            gap: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 20px;
             border-radius: 50px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--primary);
-            margin-bottom: 24px;
-            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
         }
         
-        .hero-badge::before {
-            content: '';
+        .hero-badge span {
             width: 8px;
             height: 8px;
             background: var(--primary);
@@ -152,28 +205,36 @@
         }
         
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
         }
         
         .hero h1 {
-            font-size: 4rem;
-            line-height: 1.1;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
             font-weight: 700;
-            color: var(--dark);
+            line-height: 1.05;
             margin-bottom: 24px;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .hero h1 span {
-            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, #00FFA3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .hero p {
             font-size: 1.25rem;
-            color: var(--gray);
+            color: var(--text-secondary);
             margin-bottom: 40px;
             max-width: 550px;
+            line-height: 1.8;
         }
         
         .hero-buttons {
@@ -185,42 +246,44 @@
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             padding: 16px 32px;
-            border-radius: 10px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 20px rgba(0,132,61,0.3);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--dark-bg);
+            box-shadow: 0 0 40px var(--primary-glow);
         }
         
         .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,132,61,0.4);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 60px var(--primary-glow);
         }
         
         .btn-secondary {
-            background: white;
-            color: var(--dark);
-            border: 2px solid #e2e8f0;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
         }
         
         .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
             border-color: var(--primary);
-            color: var(--primary);
         }
         
         /* Stats */
         .stats {
-            background: var(--primary);
-            padding: 40px 0;
+            padding: 60px 40px;
+            background: rgba(255,255,255,0.02);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
         .stats-grid {
@@ -232,49 +295,68 @@
             text-align: center;
         }
         
-        .stat-item { color: white; }
+        .stat-item {
+            position: relative;
+        }
+        
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .stat-item:last-child::after { display: none; }
         
         .stat-number {
-            font-size: 2.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
             font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), #00FFA3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 4px;
         }
         
         .stat-label {
+            color: var(--text-muted);
             font-size: 0.9rem;
-            opacity: 0.9;
         }
         
         /* Services */
         .services {
-            padding: 100px 40px;
-            background: var(--light);
+            padding: 120px 40px;
         }
         
         .section-header {
             text-align: center;
             max-width: 600px;
-            margin: 0 auto 60px;
+            margin: 0 auto 80px;
         }
         
         .section-label {
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
         
         .section-title {
-            font-size: 2.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 700;
-            color: var(--dark);
             margin-bottom: 16px;
         }
         
         .section-subtitle {
-            color: var(--gray);
+            color: var(--text-secondary);
             font-size: 1.1rem;
         }
         
@@ -283,16 +365,15 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            gap: 24px;
         }
         
         .service-card {
-            background: white;
-            padding: 40px 32px;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            transition: all 0.4s ease;
-            border: 1px solid #f1f5f9;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 36px;
+            transition: all 0.4s;
             position: relative;
             overflow: hidden;
         }
@@ -300,65 +381,65 @@
         .service-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,214,125,0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
         }
         
         .service-card:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
+            border-color: rgba(0,214,125,0.3);
+            background: rgba(255,255,255,0.04);
         }
         
         .service-card:hover::before {
-            transform: scaleX(1);
+            opacity: 1;
         }
         
         .service-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(0,214,125,0.2), rgba(0,214,125,0.05));
+            border: 1px solid rgba(0,214,125,0.2);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 24px;
         }
         
         .service-card h4 {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 12px;
-            color: var(--dark);
         }
         
         .service-card p {
-            color: var(--gray);
+            color: var(--text-secondary);
             font-size: 0.95rem;
+            line-height: 1.7;
         }
         
         .service-link {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             margin-top: 20px;
             color: var(--primary);
             font-weight: 600;
             text-decoration: none;
             font-size: 0.9rem;
+            transition: gap 0.3s;
         }
         
-        .service-link:hover { gap: 10px; }
+        .service-link:hover { gap: 12px; }
         
-        /* Why Choose Us */
+        /* Why Us */
         .why-us {
-            padding: 100px 40px;
-            background: white;
+            padding: 120px 40px;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,214,125,0.02) 50%, transparent 100%);
         }
         
         .why-grid {
@@ -371,6 +452,7 @@
         }
         
         .why-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 24px;
@@ -378,7 +460,7 @@
         }
         
         .why-content p {
-            color: var(--gray);
+            color: var(--text-secondary);
             font-size: 1.1rem;
             margin-bottom: 32px;
         }
@@ -398,17 +480,18 @@
         .why-list .check {
             width: 28px;
             height: 28px;
-            background: var(--primary);
-            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--dark-bg);
             flex-shrink: 0;
+            box-shadow: 0 0 20px var(--primary-glow);
         }
         
         .why-image {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            background: linear-gradient(135deg, rgba(0,214,125,0.1), rgba(124,58,237,0.1));
             border-radius: 24px;
             height: 500px;
             display: flex;
@@ -416,54 +499,57 @@
             justify-content: center;
             font-size: 8rem;
             position: relative;
-            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
-        .why-image::after {
+        .why-image::before {
             content: '';
             position: absolute;
             inset: 20px;
-            border: 2px dashed rgba(0,132,61,0.2);
+            border: 1px dashed rgba(0,214,125,0.3);
             border-radius: 16px;
         }
         
-        /* CTA Section */
+        /* CTA */
         .cta {
-            padding: 100px 40px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 120px 40px;
             text-align: center;
+            position: relative;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            opacity: 0.3;
+            z-index: -1;
         }
         
         .cta h2 {
-            font-size: 2.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
             font-weight: 700;
-            color: white;
             margin-bottom: 16px;
         }
         
         .cta p {
-            color: rgba(255,255,255,0.9);
+            color: var(--text-secondary);
             font-size: 1.2rem;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
         
-        .cta .btn {
-            background: white;
-            color: var(--primary);
-        }
-        
-        .cta .btn:hover {
-            background: var(--light);
-            transform: translateY(-2px);
-        }
-        
         /* Contact */
         .contact {
-            padding: 100px 40px;
-            background: var(--light);
+            padding: 120px 40px;
+            background: rgba(255,255,255,0.02);
         }
         
         .contact-grid {
@@ -472,20 +558,22 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
-            background: white;
+            background: var(--dark-card);
             border-radius: 24px;
             padding: 60px;
-            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.3);
         }
         
         .contact-info h3 {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 16px;
         }
         
         .contact-info > p {
-            color: var(--gray);
+            color: var(--text-secondary);
             margin-bottom: 32px;
         }
         
@@ -499,7 +587,8 @@
         .contact-icon {
             width: 50px;
             height: 50px;
-            background: #e8f5e9;
+            background: rgba(0,214,125,0.1);
+            border: 1px solid rgba(0,214,125,0.2);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -513,7 +602,7 @@
         }
         
         .contact-item p {
-            color: var(--gray);
+            color: var(--text-secondary);
             font-size: 0.95rem;
         }
         
@@ -522,11 +611,13 @@
         .contact-form select {
             width: 100%;
             padding: 16px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
             font-size: 1rem;
             font-family: inherit;
-            transition: border-color 0.3s;
+            color: white;
+            transition: all 0.3s;
             margin-bottom: 20px;
         }
         
@@ -535,6 +626,11 @@
         .contact-form select:focus {
             outline: none;
             border-color: var(--primary);
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .contact-form select option {
+            background: var(--dark-card);
         }
         
         .contact-form textarea {
@@ -545,25 +641,26 @@
         .contact-form button {
             width: 100%;
             padding: 18px;
-            background: var(--primary);
-            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--dark-bg);
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px var(--primary-glow);
         }
         
         .contact-form button:hover {
-            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 50px var(--primary-glow);
         }
         
         /* Footer */
         footer {
-            background: var(--dark);
-            color: white;
             padding: 60px 40px 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
         
         .footer-grid {
@@ -576,7 +673,7 @@
         }
         
         .footer-brand p {
-            color: rgba(255,255,255,0.6);
+            color: var(--text-secondary);
             margin: 20px 0;
             font-size: 0.95rem;
         }
@@ -589,18 +686,20 @@
         .footer-social a {
             width: 44px;
             height: 44px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             text-decoration: none;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
         
         .footer-social a:hover {
             background: var(--primary);
+            border-color: var(--primary);
         }
         
         .footer-column h4 {
@@ -618,27 +717,27 @@
         }
         
         .footer-column a {
-            color: rgba(255,255,255,0.6);
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.95rem;
             transition: color 0.3s;
         }
         
         .footer-column a:hover {
-            color: white;
+            color: var(--primary);
         }
         
         .footer-bottom {
             max-width: 1200px;
             margin: 0 auto;
             padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255,255,255,0.05);
             text-align: center;
-            color: rgba(255,255,255,0.5);
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
         
-        /* Mobile Responsive */
+        /* Responsive */
         @media (max-width: 968px) {
             .hero h1 { font-size: 2.8rem; }
             .services-grid { grid-template-columns: repeat(2, 1fr); }
@@ -655,10 +754,15 @@
             .nav-container { padding: 15px 20px; }
             nav ul { display: none; }
             .footer-grid { grid-template-columns: 1fr; }
+            .stat-item::after { display: none; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
@@ -678,7 +782,10 @@
 
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-badge">NDIS Registered Provider</div>
+            <div class="hero-badge">
+                <span></span>
+                NDIS Registered Provider
+            </div>
             <h1>Exceptional Support for <span>Your NDIS Journey</span></h1>
             <p>We provide personalized, high-quality disability support services that empower you to achieve your goals, live independently, and thrive in your community.</p>
             <div class="hero-buttons">
@@ -700,7 +807,7 @@
             </div>
             <div class="stat-item">
                 <div class="stat-number">50+</div>
-                <div class="stat-label">Dedicated Support Workers</div>
+                <div class="stat-label">Support Workers</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">24/7</div>
@@ -713,43 +820,43 @@
         <div class="section-header">
             <div class="section-label">Our Services</div>
             <h2 class="section-title">Comprehensive NDIS Support</h2>
-            <p class="section-subtitle">Tailored services designed to meet your unique needs and help you achieve your personal goals.</p>
+            <p class="section-subtitle">Tailored services designed to meet your unique needs.</p>
         </div>
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-icon">🏠</div>
                 <h4>Supported Independent Living</h4>
-                <p>Personalized support to help you live independently in your own home, including daily living skills and household management.</p>
+                <p>Personalized support to help you live independently, including daily living skills and household management.</p>
                 <a href="#contact" class="service-link">Learn more →</a>
             </div>
             <div class="service-card">
                 <div class="service-icon">👥</div>
                 <h4>Community Participation</h4>
-                <p>Support to engage in community activities, social events, and build meaningful connections within your local area.</p>
+                <p>Support to engage in community activities, social events, and build meaningful connections.</p>
                 <a href="#contact" class="service-link">Learn more →</a>
             </div>
             <div class="service-card">
                 <div class="service-icon">📊</div>
                 <h4>Plan Management</h4>
-                <p>Expert management of your NDIS funds, ensuring you get the most value from your plan while reducing administrative stress.</p>
+                <p>Expert management of your NDIS funds, ensuring you get the most value from your plan.</p>
                 <a href="#contact" class="service-link">Learn more →</a>
             </div>
             <div class="service-card">
                 <div class="service-icon">🩺</div>
                 <h4>Therapeutic Supports</h4>
-                <p>Access to physiotherapy, occupational therapy, psychology, speech therapy, and other allied health professionals.</p>
+                <p>Access to physiotherapy, occupational therapy, psychology, and allied health professionals.</p>
                 <a href="#contact" class="service-link">Learn more →</a>
             </div>
             <div class="service-card">
                 <div class="service-icon">💼</div>
                 <h4>Employment Support</h4>
-                <p>Assistance with finding meaningful employment, workplace accommodations, and ongoing on-the-job support.</p>
+                <p>Assistance with finding meaningful employment and ongoing on-the-job support.</p>
                 <a href="#contact" class="service-link">Learn more →</a>
             </div>
             <div class="service-card">
                 <div class="service-icon">🚗</div>
                 <h4>Transport Services</h4>
-                <p>Reliable transport to help you get to appointments, work, education, and community activities safely.</p>
+                <p>Reliable transport to appointments, work, education, and community activities.</p>
                 <a href="#contact" class="service-link">Learn more →</a>
             </div>
         </div>
@@ -760,27 +867,27 @@
             <div class="why-image">🤝</div>
             <div class="why-content">
                 <h2>Why Choose NDIS Support Hub?</h2>
-                <p>We're committed to providing exceptional support that makes a real difference in the lives of the people we serve.</p>
+                <p>We're committed to providing exceptional support that makes a real difference.</p>
                 <ul class="why-list">
                     <li>
                         <span class="check">✓</span>
-                        <span>NDIS Registered Provider with verified expertise</span>
+                        <span>NDIS Registered Provider</span>
                     </li>
                     <li>
                         <span class="check">✓</span>
-                        <span>Person-centered approach tailored to your goals</span>
+                        <span>Person-centered approach</span>
                     </li>
                     <li>
                         <span class="check">✓</span>
-                        <span>Highly trained and dedicated support workers</span>
+                        <span>Highly trained support workers</span>
                     </li>
                     <li>
                         <span class="check">✓</span>
-                        <span>Flexible service options to suit your lifestyle</span>
+                        <span>Flexible service options</span>
                     </li>
                     <li>
                         <span class="check">✓</span>
-                        <span>Transparent pricing with no hidden fees</span>
+                        <span>Transparent pricing</span>
                     </li>
                 </ul>
             </div>
@@ -789,15 +896,15 @@
 
     <section id="contact" class="cta">
         <h2>Ready to Get Started?</h2>
-        <p>Take the first step towards achieving your goals. Contact us today for a free, no-obligation consultation about how we can support you.</p>
-        <a href="#contact-form" class="btn">Contact Us Today</a>
+        <p>Contact us today for a free, no-obligation consultation about how we can support you.</p>
+        <a href="#contact-form" class="btn btn-primary">Contact Us Today</a>
     </section>
 
     <section class="contact">
         <div class="contact-grid">
             <div class="contact-info">
                 <h3>Let's Connect</h3>
-                <p>We're here to answer any questions you have about NDIS services and how we can support you.</p>
+                <p>We're here to answer any questions about NDIS services.</p>
                 <div class="contact-item">
                     <div class="contact-icon">📍</div>
                     <div>
@@ -856,7 +963,7 @@
                     <div class="logo-icon">🏥</div>
                     NDIS Support Hub
                 </a>
-                <p>Providing exceptional NDIS support services across Sydney and NSW. We're committed to empowering individuals to live their best lives.</p>
+                <p>Providing exceptional NDIS support services across Sydney and NSW.</p>
                 <div class="footer-social">
                     <a href="#">f</a>
                     <a href="#">in</a>
@@ -870,7 +977,6 @@
                     <li><a href="#">Community Access</a></li>
                     <li><a href="#">Plan Management</a></li>
                     <li><a href="#">Therapeutic Supports</a></li>
-                    <li><a href="#">Employment</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -879,7 +985,6 @@
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Our Team</a></li>
                     <li><a href="#">Careers</a></li>
-                    <li><a href="#">News</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
@@ -888,9 +993,8 @@
                 <ul>
                     <li><a href="#">NDIS Information</a></li>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Forms</a></li>
                     <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Terms</a></li>
                 </ul>
             </div>
         </div>
